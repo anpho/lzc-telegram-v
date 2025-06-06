@@ -1,0 +1,27 @@
+#!/usr/bin/expect
+
+set username [lindex $argv 0]
+set password [lindex $argv 1]
+set cmd "/usr/local/bin/lzc-cli"
+
+set timeout 20
+match_max 100000
+
+spawn $cmd  appstore login
+
+expect {
+    "请输入登录用户名" { send "$username\r" }
+    timeout { puts "Timeout waiting for username prompt"; exit 1 }
+}
+
+expect {
+    "请输入登录密码" { send "$password\r" }
+    timeout { puts "Timeout waiting for password prompt"; exit 1 }
+}
+
+expect {
+    "登录成功" { puts "Login successful!" }
+    "错误" { puts "Login failed!"; exit 1 }
+    timeout { puts "Login completed with unknown result." }
+}
+interact
