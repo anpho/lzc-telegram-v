@@ -8,8 +8,22 @@ homepage: https://github.com/anpho/lzc-telegram-v
 author: anpho
 application:
   subdomain: telegramv
+  multi_instance: true
   gpu_accel: true
   kvm_accel: true
+  ingress:
+    - protocol: tcp
+      port: 2017
+      service: v2raya
+    - protocol: tcp
+      port: 20170
+      service: v2raya
+    - protocol: tcp
+      port: 20171
+      service: v2raya
+    - protocol: tcp
+      port: 20172
+      service: v2raya
   routes:
     - /=http://telegramv.anpho.lzcapp.telegramv.lzcapp:3000
 
@@ -31,7 +45,7 @@ services:
       # - ENABLE_CJK_FONT=1
       # - LANG=zh_CN.UTF-8
       # - DOCKER_MODS=registry.lazycat.cloud/anpho/linuxserver/mods:8fdb9ebcb441c90c
-      - INSTALL_PACKAGES=fonts-noto-cjk
+      # - INSTALL_PACKAGES=fonts-noto-cjk
       - LC_ALL=zh_CN.UTF-8
     shm-size: "4gb"
       
