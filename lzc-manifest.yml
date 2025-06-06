@@ -1,0 +1,36 @@
+lzc-sdk-version: 0.1
+name: telegram/v
+package: anpho.lzcapp.telegramv
+version: 1.0
+description: telegram V
+license: https://choosealicense.com/licenses/mit/
+homepage: 
+author: 
+application:
+  subdomain: telegramv
+  gpu_accel: true
+  kvm_accel: true
+  routes:
+    - /=http://telegramv.anpho.lzcapp.telegramv.lzcapp:3000
+
+services:
+  v2raya:
+    image: registry.lazycat.cloud/anpho/mzz2017/v2raya:0f8d6a55a618777e
+    network_mode: host
+    netadmin: true
+    binds:
+      - /lzcapp/var/v2raya:/etc/v2raya
+  telegramv:
+    image: registry.lazycat.cloud/anpho/sassv/telegram:4b6dbb1c77be81a6
+    # sassv/telegram
+    binds:
+      - /lzcapp/run/mnt/home/telegram:/config
+    environment:
+      # - HTTP_PROXY=HTTP://whoami:1080
+      # - ENABLE_CJK_FONT=1
+      # - LANG=zh_CN.UTF-8
+      # - DOCKER_MODS=registry.lazycat.cloud/anpho/linuxserver/mods:8fdb9ebcb441c90c
+      - INSTALL_PACKAGES=fonts-noto-cjk
+      - LC_ALL=zh_CN.UTF-8
+    shm-size: "4gb"
+      
