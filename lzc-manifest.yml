@@ -1,11 +1,11 @@
 lzc-sdk-version: 0.1
 name: telegram/v
 package: anpho.lzcapp.telegramv
-version: 1.0
+version: 1.1
 description: telegram V
 license: https://choosealicense.com/licenses/mit/
-homepage: 
-author: 
+homepage: https://github.com/anpho/lzc-telegram-v
+author: anpho
 application:
   subdomain: telegramv
   gpu_accel: true
@@ -25,6 +25,7 @@ services:
     # sassv/telegram
     binds:
       - /lzcapp/run/mnt/home/telegram:/config
+      - /lzcapp/pkg/content/fonts:/usr/share/fonts
     environment:
       # - HTTP_PROXY=HTTP://whoami:1080
       # - ENABLE_CJK_FONT=1
